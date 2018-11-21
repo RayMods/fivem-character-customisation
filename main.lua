@@ -28,7 +28,7 @@ function playIntroAnim(animKey)
     Citizen.Wait(100)
   end
 
-  StartPlayerTeleport(PlayerId(), 405.621, -997.099365, -100.0, 92.0)
+  StartPlayerTeleport(PlayerId(), 405.421, -997.099365, -100.0, 92.0)
   while (IsPlayerTeleportActive()) do
     Citizen.Wait(5)
   end
@@ -41,7 +41,6 @@ function playIntroAnim(animKey)
     times = times + 1
     Citizen.Wait(5000)
   end
-
 end
 
 function setPlayerModel(modelKey)
