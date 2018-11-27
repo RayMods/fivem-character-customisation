@@ -99,11 +99,20 @@ function setPlayerModel(modelKey)
 
     SetPlayerModel(PlayerId(), modelKey)
     SetPedDefaultComponentVariation(PlayerPedId())
-    SetPedComponentVariation(PlayerPedId(), 3, 5, 0, 2);
-    SetPedComponentVariation(PlayerPedId(), 8, 15, 0, 2);
-    SetPedComponentVariation(PlayerPedId(), 11, 5, 0, 2)
-    SetPedComponentVariation(PlayerPedId(), 4, 7, 15, 2);
-    SetPedComponentVariation(PlayerPedId(), 6, 7, 0, 0);
+
+    -- Male Clothing
+    SetPedComponentVariation(PlayerPedId(), 3, 5, 0, 2);   -- torso
+    SetPedComponentVariation(PlayerPedId(), 4, 7, 15, 2);  -- pants
+    SetPedComponentVariation(PlayerPedId(), 6, 7, 0, 0);   -- shoes
+    SetPedComponentVariation(PlayerPedId(), 8, 15, 0, 2);  -- shirt
+    SetPedComponentVariation(PlayerPedId(), 11, 5, 0, 2)   -- jacket
+
+    -- Female Clothing
+    -- SetPedComponentVariation(PlayerPedId(), 3, 4, 0, 2)   -- torso
+    -- SetPedComponentVariation(PlayerPedId(), 4, 3, 15, 2)  -- pants
+    -- SetPedComponentVariation(PlayerPedId(), 6, 4, 2, 2)   -- shoes
+    -- SetPedComponentVariation(PlayerPedId(), 8, 14, 0, 2) -- shirt
+    -- SetPedComponentVariation(PlayerPedId(), 11, 118, 0, 2) -- jacket
   -- end
 end
 
