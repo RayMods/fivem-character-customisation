@@ -20,12 +20,12 @@ Citizen.CreateThread(function ()
   DoScreenFadeOut()
   Citizen.Wait(500)
 
-  DoScreenFadeIn(7000)
+  DoScreenFadeIn(6500)
 end)
 
 
 function createCam(x, y, z)
-  return CreateCameraWithParams('DEFAULT_SCRIPTED_CAMERA', x, y, z, 0, 0, 0, 60.0, true, 2)
+  return CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', x, y, z, -10.0, 0, 0, 60.0, true, 2)
 end
 
 -- Camera Anim Thread
@@ -44,9 +44,9 @@ Citizen.CreateThread(function ()
   }
 
 
-  local cam1 = createCam(402.8, -1002.2399, -99.05)
-  local cam2 = createCam(402.8, -999.125, -99.05)
-  local cam3 = createCam(402.8, -999.1, -99.05)
+  local cam1 = createCam(402.8, -1002.2399, -98.65)
+  local cam2 = createCam(402.8, -999.125, -98.65)
+  local cam3 = createCam(402.8, -999.1, -98.65)
 
   while (not DoesCamExist(cam1) and not DoesCamExist(cam2) and not DoesCamExist(cam3)) do
     Citizen.Wait(5)
@@ -56,8 +56,10 @@ Citizen.CreateThread(function ()
   RenderScriptCams(true, true, 0, false, false)
   Citizen.Wait(100)
   SetCamActiveWithInterp(cam2, cam1, 3500, 0, 0)
+  DestroyCam(cam1)
   Citizen.Wait(3500)
   SetCamActiveWithInterp(cam3, cam2, 500, 0, 0)
+  DestroyCam(cam2)
 end)
 
 -- Ped Anim Thread
@@ -89,7 +91,7 @@ function playIntroAnim(animKey)
 end
 
 function setPlayerModel(modelKey)
-  if(GetEntityModel(PlayerPedId()) ~= modelKey) then
+  -- if(GetEntityModel(PlayerPedId()) ~= modelKey) then
     RequestModel(modelKey)
     while (not HasModelLoaded(modelKey)) do
       Citizen.Wait(100)
@@ -97,7 +99,11 @@ function setPlayerModel(modelKey)
 
     SetPlayerModel(PlayerId(), modelKey)
     SetPedDefaultComponentVariation(PlayerPedId())
-  end
+    SetPedComponentVariation(PlayerPedId(), 8, 15, 0, 2);
+    SetPedComponentVariation(PlayerPedId(), 11, 1, 11, 2)
+    SetPedComponentVariation(PlayerPedId(), 4, 3, 7, 2);
+    SetPedComponentVariation(PlayerPedId(), 6, 42, 2, 0);
+  -- end
 end
 
 Citizen.CreateThread(function ()
