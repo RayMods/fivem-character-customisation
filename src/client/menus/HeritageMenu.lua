@@ -10,7 +10,7 @@ local FATHERS = {
   'Isaac',
   'Evan',
   'Ethan',
-  'Veincent',
+  'Vincent',
   'Angel',
   'Deigo',
   'Adrian',
@@ -73,7 +73,6 @@ local function addHeritageWindow(mom, dad)
 end
 
 local function updateHeritageWindow(parent, index)
-  print(index)
   _values[parent] = index - 1
   _heritageWindow:Index(_values.mom, _values.dad)
 end
