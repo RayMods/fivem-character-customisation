@@ -99,10 +99,11 @@ function setPlayerModel(modelKey)
 
     SetPlayerModel(PlayerId(), modelKey)
     SetPedDefaultComponentVariation(PlayerPedId())
+    SetPedComponentVariation(PlayerPedId(), 3, 5, 0, 2);
     SetPedComponentVariation(PlayerPedId(), 8, 15, 0, 2);
-    SetPedComponentVariation(PlayerPedId(), 11, 1, 11, 2)
-    SetPedComponentVariation(PlayerPedId(), 4, 3, 7, 2);
-    SetPedComponentVariation(PlayerPedId(), 6, 42, 2, 0);
+    SetPedComponentVariation(PlayerPedId(), 11, 5, 0, 2)
+    SetPedComponentVariation(PlayerPedId(), 4, 7, 15, 2);
+    SetPedComponentVariation(PlayerPedId(), 6, 7, 0, 0);
   -- end
 end
 
