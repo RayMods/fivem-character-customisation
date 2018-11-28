@@ -5,6 +5,7 @@ client_scripts {
   '@NativeUI/NativeUI.lua',
 
   -- Menu Files
+  './src/client/menus/constants/parents.lua',
   './src/client/menus/HeritageMenu.lua',
   -- './src/client/menus/MainMenu.lua',
   './src/client/menus/main.lua',
