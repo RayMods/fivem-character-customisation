@@ -5,6 +5,7 @@ local _values = {
   mom = 1,
   faceMix = 0.5,
   skinMix = 0.5,
+  skinTone = 0,
 }
 
 
@@ -45,8 +46,8 @@ local function updateHeritageWindow(parent, index)
     mother.faceId,
     father.faceId,
     0, -- third face id
-    0, -- first skin id (mother skin tone?)
-    0, -- second skin id (father skin tone?)
+    mother.skinId, -- first skin id (mother skin tone?)
+    father.skinId, -- second skin id (father skin tone?)
     0, -- third skin id
     _values.faceMix, -- shape mix (face)
     _values.skinMix, -- skin mix,
@@ -66,10 +67,10 @@ local function updateMixValue(mixKey, value)
     PlayerPedId(),
     mother.faceId,
     father.faceId,
-    0,
-    0,
-    0,
-    0,
+    nil,
+    mother.skinId,
+    father.skinId,
+    nil,
     _values.faceMix,
     _values.skinMix,
     0.5,
@@ -86,13 +87,45 @@ function CreateHeritageMenu(menuPool, parentMenu)
   _menu = menuPool:AddSubMenu(parentMenu, 'Heritage', 'Select to choose your parents.')
 
   addHeritageWindow()
-  addParentItem('Dad', HERITAGE_FATHERS, 'Select your Dad.')
   addParentItem('Mom', HERITAGE_MOTHERS, 'Select your Mom.')
+  addParentItem('Dad', HERITAGE_FATHERS, 'Select your Dad.')
   addSliderItem('Resemblance', pct, 'Select if your features are influenced more by your Mother or your Father.')
   addSliderItem('Skin Tone', pct, 'Select if your skin tone is influenced more by your Mother or your Father.')
 
+  local skinTones = {}
+  for i = 0, 45 do
+    skinTones[i + 1] = i
+  end
+  -- local skinTones = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 }
+  local skinToneSelect = NativeUI.CreateListItem('Skin', skinTones, 0, description)
+  _menu:AddItem(skinToneSelect)
+
   _menu.OnListChange = function (sender, item, index)
-    updateHeritageWindow(item:Text():lower(), index)
+    if (item:Text():lower() == 'skin') then
+      local father = HERITAGE_FATHERS[_values.dad]
+      local mother = HERITAGE_MOTHERS[_values.mom]
+
+      _values.skinTone = skinTones[index]
+
+      print(mother.faceId)
+      print(father.faceId)
+      SetPedHeadBlendData(
+        PlayerPedId(),
+        mother.faceId,
+        father.faceId,
+        0,
+        _values.skinTone,
+        _values.skinTone,
+        0,
+        _values.faceMix,
+        _values.skinMix,
+        0.5,
+        false
+      )
+    else
+      print(item:Text())
+      updateHeritageWindow(item:Text():lower(), index)
+    end
   end
   _menu.OnSliderChange = function (sender, item, index)
     local itemKey = (item:Text():lower() == 'resemblance') and 'faceMix' or 'skinMix'
