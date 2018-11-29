@@ -62,17 +62,92 @@ AddSexItem()
 CreateHeritageMenu(_pool, MainMenu)
 AddFeaturesMenu()
 AddAppearanceMenu()
-_pool:RefreshIndex()
+
+local function flashPed()
+  -- local dir = -1;
+  for i = 0, 7 do
+    if (i % 2  == 0) then
+      SetEntityAlpha(PlayerPedId(), 50)
+    else
+      SetEntityAlpha(PlayerPedId(), 255)
+    end
+
+    Citizen.Wait(100)
+  end
+end
+
+local function resetPlayerPed()
+end
+
+local function teleportToStart()
+end
+
+local function finishAndQuit()
+  local lsiaCoords = { -1017.46, -2748.97, 0.0, 161.4 }
+
+  DoScreenFadeOut(300)
+  Citizen.Wait(300)
+  StartPlayerTeleport(PlayerId(), table.unpack(lsiaCoords))
+  while (IsPlayerTeleportActive()) do
+    Citizen.Wait(5)
+  end
+  DoScreenFadeIn(300)
+  flashPed()
+  -- for i = 0, 5 do
+  --   if (i % 2 == 0) then
+  --     SetEntityAlpha(PlayerPedId(), 0)
+  --   else
+  --     SetEntityAlpha(PlayerPedId(), 255)
+  --   end
+  --   Citizen.Wait(500)
+  -- end
+end
+
+local function CreateInteractionMenu()
+  local interactionMenu = NativeUI.CreateMenu('Character Manager')
+  local initItem = NativeUI.CreateItem('Create Character', 'Create a brand new character.')
+  local editItem = NativeUI.CreateItem('Edit Character', 'Edit your current character')
+  local leaveItem = NativeUI.CreateItem('Leave Character Creation', 'Exit creation menu and spawn at LSIA.')
+
+  _pool:Add(interactionMenu)
+  interactionMenu:AddItem(initItem)
+  interactionMenu:AddItem(editItem)
+  interactionMenu:AddItem(leaveItem)
+
+  interactionMenu.OnItemSelect = function (sender, item, index)
+    if (item == initItem) then
+      print('init char creation')
+    elseif (item == leaveItem) then
+      finishAndQuit()
+      -- DoScreenFadeOut(300)
+      -- Citizen.Wait(300)
+      -- StartPlayerTeleport(PlayerId(), -1017.46, -2748.97, 0.0, 161.4)
+      -- local waited = 0;
+      -- while (IsPlayerTeleportActive()) do
+      --   Citizen.Wait(5)
+      --   waited = waited + 5
+      -- end
+      -- DoScreenFadeIn(300)
+    end
+  end
+
+  return interactionMenu
+end
 
 local _mainMenu = CreateMainMenu(_pool)
+local _interactionMenu = CreateInteractionMenu()
+_pool:RefreshIndex()
 
 
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     _pool:ProcessMenus()
-    if IsControlJustPressed(1, 51) then
-      _mainMenu:Visible(not MainMenu:Visible())
+
+    if (IsControlJustPressed(0, 166)) then
+      _mainMenu:Visible(not _mainMenu:Visible())
+    elseif (IsControlJustPressed(0, 167)) then
+      _interactionMenu:Visible(not _interactionMenu:Visible())
     end
   end
 end)

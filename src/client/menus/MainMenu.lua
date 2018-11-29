@@ -13,7 +13,7 @@ local function setPlayerModelClothing(sex)
 
   if (sex == 1) then
     -- Female Clothing
-    SetPedComponentVariation(PlayerPedId(), 3, 4, 0, 2)   -- torso
+    SetPedComponentVariation(PlayerPedId(), 3, 12, 0, 2)   -- torso
     SetPedComponentVariation(PlayerPedId(), 4, 3, 15, 2)  -- pants
     SetPedComponentVariation(PlayerPedId(), 6, 4, 2, 2)   -- shoes
     SetPedComponentVariation(PlayerPedId(), 8, 14, 0, 2) -- shirt
