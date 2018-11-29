@@ -64,13 +64,15 @@ AddFeaturesMenu()
 AddAppearanceMenu()
 _pool:RefreshIndex()
 
+local _mainMenu = CreateMainMenu(_pool)
+
 
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     _pool:ProcessMenus()
     if IsControlJustPressed(1, 51) then
-      MainMenu:Visible(not MainMenu:Visible())
+      _mainMenu:Visible(not MainMenu:Visible())
     end
   end
 end)
