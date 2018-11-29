@@ -45,13 +45,13 @@ local function updateHeritageWindow(parent, index)
     PlayerPedId(),
     mother.faceId,
     father.faceId,
-    0, -- third face id
+    nil, -- third face id
     mother.skinId, -- first skin id (mother skin tone?)
     father.skinId, -- second skin id (father skin tone?)
-    0, -- third skin id
+    nil, -- third skin id
     _values.faceMix, -- shape mix (face)
     _values.skinMix, -- skin mix,
-    0.5, -- third mix,
+    nil, -- third mix,
     false  -- not a parent ped
   )
 end
@@ -73,7 +73,7 @@ local function updateMixValue(mixKey, value)
     nil,
     _values.faceMix,
     _values.skinMix,
-    0.5,
+    nil,
     false
   )
 end
@@ -107,23 +107,20 @@ function CreateHeritageMenu(menuPool, parentMenu)
 
       _values.skinTone = skinTones[index]
 
-      print(mother.faceId)
-      print(father.faceId)
       SetPedHeadBlendData(
         PlayerPedId(),
         mother.faceId,
         father.faceId,
-        0,
+        nil,
         _values.skinTone,
         _values.skinTone,
-        0,
+        nil,
         _values.faceMix,
         _values.skinMix,
-        0.5,
+        nil,
         false
       )
     else
-      print(item:Text())
       updateHeritageWindow(item:Text():lower(), index)
     end
   end
