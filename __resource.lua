@@ -5,10 +5,13 @@ client_scripts {
   '@NativeUI/NativeUI.lua',
 
   -- Menu Files
-  './src/client/menus/constants/parents.lua',
-  './src/client/menus/HeritageMenu.lua',
-  './src/client/menus/MainMenu.lua',
-  './src/client/menus/main.lua',
+  './src/client/MainMenu/MainMenu.lua',
+  './src/client/menus.lua',
+
+  -- './src/client/menus/constants/parents.lua',
+  -- './src/client/menus/HeritageMenu.lua',
+  -- './src/client/menus/MainMenu.lua',
+  -- './src/client/menus/main.lua',
 
   './src/main.lua',
 }

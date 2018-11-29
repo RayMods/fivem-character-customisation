@@ -40,8 +40,6 @@ local function updatePlayerSex(sex)
   setPlayerModelClothing(sex)
 
   _values.sex = sex;
-
-  print('player sex updated')
 end
 
 local function addPlayerSexSelector()
