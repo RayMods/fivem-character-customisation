@@ -92,37 +92,8 @@ function CreateHeritageMenu(menuPool, parentMenu)
   addSliderItem('Resemblance', pct, 'Select if your features are influenced more by your Mother or your Father.')
   addSliderItem('Skin Tone', pct, 'Select if your skin tone is influenced more by your Mother or your Father.')
 
-  local skinTones = {}
-  for i = 0, 45 do
-    skinTones[i + 1] = i
-  end
-  -- local skinTones = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 }
-  local skinToneSelect = NativeUI.CreateListItem('Skin', skinTones, 0, description)
-  _menu:AddItem(skinToneSelect)
-
   _menu.OnListChange = function (sender, item, index)
-    if (item:Text():lower() == 'skin') then
-      local father = HERITAGE_FATHERS[_values.dad]
-      local mother = HERITAGE_MOTHERS[_values.mom]
-
-      _values.skinTone = skinTones[index]
-
-      SetPedHeadBlendData(
-        PlayerPedId(),
-        mother.faceId,
-        father.faceId,
-        nil,
-        _values.skinTone,
-        _values.skinTone,
-        nil,
-        _values.faceMix,
-        _values.skinMix,
-        nil,
-        false
-      )
-    else
-      updateHeritageWindow(item:Text():lower(), index)
-    end
+    updateHeritageWindow(item:Text():lower(), index)
   end
   _menu.OnSliderChange = function (sender, item, index)
     local itemKey = (item:Text():lower() == 'resemblance') and 'faceMix' or 'skinMix'
