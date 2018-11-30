@@ -47,14 +47,16 @@ local function tpMugshot()
   end
 
   Citizen.Wait(300)
-  DoScreenFadeIn(2500)
+  -- DoScreenFadeIn(2500)
 end
 
 local function handleSelectOption(sender, item, index)
   if (item == _leaveItem) then
     finish()
-  elseif (item == _initItem or item == _editItem) then
+  elseif (item == _initItem) then
+    local action = item == _initItem and 'createCharacter' or 'editCharacter';
     tpMugshot()
+    TriggerEvent('characterCreatorInit', action)
   end
 end
 

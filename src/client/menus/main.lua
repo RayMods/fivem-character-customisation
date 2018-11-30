@@ -63,45 +63,6 @@ CreateHeritageMenu(_pool, MainMenu)
 AddFeaturesMenu()
 AddAppearanceMenu()
 
-local function flashPed()
-  -- local dir = -1;
-  for i = 0, 7 do
-    if (i % 2  == 0) then
-      SetEntityAlpha(PlayerPedId(), 50)
-    else
-      SetEntityAlpha(PlayerPedId(), 255)
-    end
-
-    Citizen.Wait(100)
-  end
-end
-
-local function resetPlayerPed()
-end
-
-local function teleportToStart()
-end
-
-local function finishAndQuit()
-  local lsiaCoords = { -1017.46, -2748.97, 0.0, 161.4 }
-
-  DoScreenFadeOut(300)
-  Citizen.Wait(300)
-  StartPlayerTeleport(PlayerId(), table.unpack(lsiaCoords))
-  while (IsPlayerTeleportActive()) do
-    Citizen.Wait(5)
-  end
-  DoScreenFadeIn(300)
-  flashPed()
-  -- for i = 0, 5 do
-  --   if (i % 2 == 0) then
-  --     SetEntityAlpha(PlayerPedId(), 0)
-  --   else
-  --     SetEntityAlpha(PlayerPedId(), 255)
-  --   end
-  --   Citizen.Wait(500)
-  -- end
-end
 
 local function CreateInteractionMenu()
   local interactionMenu = NativeUI.CreateMenu('Character Manager')
