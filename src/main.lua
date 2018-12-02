@@ -82,7 +82,7 @@ local function playCreatorIntro(changePed)
   local animFinished = false
   local camFinished = false
 
-  setPlayerModel(MALE_MODEL)
+  local eventPromise = TriggerEvent('cc_initPlayerModel', 2)
   Citizen.CreateThread(function ()
     playIntroPedAnim(MALE_ANIM)
     animFinished = true
@@ -132,3 +132,9 @@ function setPlayerModel(modelKey)
     -- SetPedComponentVariation(PlayerPedId(), 11, 118, 0, 2) -- jacket
   -- end
 end
+
+
+Citizen.CreateThread(function ()
+  Citizen.Wait(0)
+  DoScreenFadeIn(0)
+end)

@@ -4,17 +4,17 @@ client_scripts {
   -- Vendor Files
   '@NativeUI/NativeUI.lua',
 
-  -- Menu Files
+  -- Constant Values
   './src/client/CharacterMenu/constants/parents.lua',
+
+  -- Controllers
+  './src/client/controllers/pedController.lua',
+
+  -- Menu Files
   './src/client/CharacterMenu/HeritageMenu.lua',
   './src/client/CharacterMenu/CharacterMenu.lua',
   './src/client/MainMenu/MainMenu.lua',
   './src/client/menus.lua',
-
-  -- './src/client/menus/constants/parents.lua',
-  -- './src/client/menus/HeritageMenu.lua',
-  -- './src/client/menus/MainMenu.lua',
-  -- './src/client/menus/main.lua',
 
   './src/main.lua',
 }
